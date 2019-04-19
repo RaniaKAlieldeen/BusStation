@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="454.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="busstation.ManagerActionsController">
+   <children>
+      <HBox layoutY="-1.0" prefHeight="400.0" prefWidth="600.0" />
+      <BorderPane prefHeight="515.0" prefWidth="600.0">
+         <bottom>
+            <AnchorPane prefHeight="49.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="LogoutB" layoutX="502.0" layoutY="14.0" lineSpacing="20.0" mnemonicParsing="false" onAction="#LogoutBClicked" text="Log Out" />
+               </children>
+            </AnchorPane>
+         </bottom>
+         <left>
+            <VBox fx:id="AddTripV" prefHeight="339.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="From" />
+                  <TextField fx:id="FromTF" prefHeight="25.0" prefWidth="178.0" />
+                  <Label text="To" />
+                  <TextField fx:id="ToTF" prefHeight="25.0" prefWidth="180.0" />
+                  <Label text="Distance" />
+                  <TextField fx:id="DistanceTF" />
+                  <Label text="Vehicle" />
+                  <ChoiceBox fx:id="ChooseVehicleIDCB" prefHeight="25.0" prefWidth="187.0" />
+                  <Label text="No. of Stops" />
+                  <ChoiceBox fx:id="TripFlavorCB" prefHeight="25.0" prefWidth="187.0" />
+                  <Label text="Trip Type" />
+                  <ChoiceBox fx:id="TripTypeCB" prefHeight="25.0" prefWidth="188.0" />
+                  <Button fx:id="DoneAddB" mnemonicParsing="false" onAction="#doneAddBClicked" text="add" />
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </VBox>
+         </left>
+         <right>
+            <VBox fx:id="AssignDriverV" alignment="CENTER" disable="true" prefHeight="277.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="186.0" text="Choose a trip" />
+                  <ChoiceBox fx:id="ChooseTripCB" prefHeight="25.0" prefWidth="184.0" />
+                  <Label prefHeight="17.0" prefWidth="184.0" text="Choose a driver" />
+                  <ChoiceBox fx:id="ChooseDriverCB" prefHeight="25.0" prefWidth="184.0">
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </ChoiceBox>
+                  <Region prefHeight="36.0" prefWidth="200.0" />
+                  <Button fx:id="DoneAssignB" mnemonicParsing="false" onAction="#doneAssignBClicked" text="assign" />
+                  <Label fx:id="driverAssignedL" prefHeight="17.0" prefWidth="188.0" />
+               </children>
+            </VBox>
+         </right>
+         <top>
+            <GridPane alignment="CENTER" prefHeight="61.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="53.0" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="AssignDriverB" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#assignDriverBBClicked" text="Assign driver" GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="RemoveTripB" alignment="CENTER" mnemonicParsing="false" onAction="#removeTripBClicked" text="Remove trip" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="AddTripB" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addTripBClicked" text="Add trip">
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+            </GridPane>
+         </top>
+         <center>
+            <VBox fx:id="RemoveTripV" alignment="CENTER" disable="true" prefHeight="375.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="184.0" text="Choose trip to delete" />
+                  <ListView fx:id="RemoveTripList" prefHeight="204.0" prefWidth="200.0" />
+                  <Button fx:id="DoneRemoveB" mnemonicParsing="false" onAction="#doneRemoveBClicked" text="remove" />
+                  <Label fx:id="tripRemovedL" />
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

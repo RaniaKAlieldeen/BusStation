@@ -1,0 +1,4 @@
+1004,handasa,tokyo,878546.0,1,24,4588,700,false
+1003,alexandria,cairo,100.0,0,5,4000,800,true
+1002,mansheya,sidi bsihr,15.0,0,22,4000,888,false
+1001,sidi bishr,mansheya,15.0,3,24,4000,888,false

@@ -1,0 +1,6 @@
+Car,500
+Bus,700
+MiniBus,800
+Bus,564
+Bus,987
+Bus,888

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="busstation.DriverLoginController">
+   <children>
+      <BorderPane prefHeight="410.0" prefWidth="610.0">
+         <top>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="72.0" prefWidth="152.0" text="Driver Login" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+         </top>
+         <left>
+            <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </right>
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="TOP_LEFT" prefHeight="17.0" prefWidth="211.0" text="Enter ID" />
+                  <TextField fx:id="IdField" alignment="TOP_LEFT" promptText="4288" />
+                  <Region prefHeight="26.0" prefWidth="200.0" />
+                  <Label prefHeight="17.0" prefWidth="214.0" text="Enter password" />
+                  <PasswordField fx:id="PasswordField" promptText="******" />
+                  <HBox alignment="CENTER" prefHeight="81.0" prefWidth="200.0" spacing="30.0">
+                     <children>
+                        <Button fx:id="LoginB" mnemonicParsing="false" onAction="#loginBClicked" text="Log In" />
+                        <Button fx:id="BackB" mnemonicParsing="false" onAction="#backBClicked" prefWidth="65.0" text="Back" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="ErrorL" text="Incorrect ID or Password!" visible="false">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

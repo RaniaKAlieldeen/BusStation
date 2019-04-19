@@ -1,0 +1,13 @@
+ try {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/sample/second_view.fxml"));
+            Parent root = (Parent) loader.load();
+
+            SecondController secController=loader.getController();
+            secController.myFunction(textField.getText());
+
+            Stage stage=new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
