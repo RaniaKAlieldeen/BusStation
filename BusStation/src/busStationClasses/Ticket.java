@@ -23,6 +23,7 @@ public class Ticket {
 
     public static final HashMap<String,Ticket> TICKET_MAP = new HashMap<>();
     
+    //for when reading from file
     public Ticket(String[] args) {
         ticketId = args[0];
         ticketType = Boolean.parseBoolean(args[1]);
@@ -31,6 +32,7 @@ public class Ticket {
         
     }
     
+    //for creating ticket during runtime
     public Ticket(Trip t1,Trip t2,String cId) {
         if(t2 ==null){
             ticketId = t1.getTripId()+t1.getAvailableSeats();

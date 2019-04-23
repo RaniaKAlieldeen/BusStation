@@ -29,7 +29,7 @@ public class Trip {
     private int flavor; 
     private int availableSeats;
     private double distance;
-    private String[] ticketsBooked;
+    private ArrayList<String> ticketsBooked = new ArrayList<>();
     
     public static final HashMap<String, Trip> TRIP_MAP = new HashMap<>();
     
@@ -44,9 +44,9 @@ public class Trip {
         driverId = args[6];
         vehicleId = args[7];
         tripType = Boolean.parseBoolean(args[8]); 
-        ticketsBooked = new String[args.length-9];
+        //ticketsBooked = new String[args.length-9];
         for (int i = 9; i < args.length; i++) {
-            ticketsBooked[i-9] = args[i];
+            ticketsBooked.add(args[i]);
         }
     }
 
@@ -124,13 +124,15 @@ public class Trip {
             
     }
 
-    public String[] getTicketsBooked() {
+    public ArrayList<String> getTicketsBooked() {
         return ticketsBooked;
     }
 
-    public void setTicketsBooked(String[] ticketsBooked) {
-        this.ticketsBooked = ticketsBooked;
+    public void setTicketsBooked(String ticketsBooked) {
+        this.ticketsBooked.add(ticketsBooked);
     }
+
+    
     
     
     

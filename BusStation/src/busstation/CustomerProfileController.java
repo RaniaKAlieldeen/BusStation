@@ -19,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 
@@ -30,6 +31,7 @@ public class CustomerProfileController implements Initializable {
     @FXML private Label TripsL;
     @FXML private Button BookTripB;
     @FXML private Button LogoutB;
+    @FXML private ListView<String> TicketsLV;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -39,7 +41,8 @@ public class CustomerProfileController implements Initializable {
     public void initData(Customer c){
         WelcomeL.setText("Welcome, " + c.getName());
         this.c = c;
-        TripsL.setText(c.getTicketsBooked().toString());
+        //TripsL.setText(c.getTicketsBooked().toString());
+        TicketsLV.getItems().addAll(c.getTicketsBooked());
     }
     
     public void BookTripBClicked(ActionEvent event) throws IOException

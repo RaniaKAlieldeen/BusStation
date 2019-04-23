@@ -9,8 +9,11 @@ import busStationClasses.Customer;
 import busStationClasses.Trip;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,8 +43,9 @@ public class CustomerActionsController implements Initializable {
     @FXML private ListView<String> TripsAvailableLV;
     
     Customer c;
-    public void initData(Customer c){
+    public void initData(Customer c) throws IOException{
         this.c = c ;
+        Trip.readTripsFile();
     }
     
     public void backBClicked(ActionEvent event) throws IOException
@@ -64,9 +68,10 @@ public class CustomerActionsController implements Initializable {
         loader.setLocation(getClass().getResource("BookTicket.fxml"));
         Parent HomeParent = loader.load();
         Scene HomeScene = new Scene(HomeParent);
-        
-        CustomerProfileController CPC = loader.getController();
-        CPC.initData(c);
+        ObservableList<String> chosenTrips =  TripsAvailableLV.getSelectionModel().getSelectedItems();
+        System.out.println(chosenTrips.get(0));
+        BookTicketController BTC = loader.getController();
+        BTC.initData(c,chosenTrips);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(HomeScene);
@@ -76,28 +81,43 @@ public class CustomerActionsController implements Initializable {
     public void searchBClicked(ActionEvent event) throws IOException
     {
         TripsAvailableLV.getItems().clear();
-        TripsAvailableLV.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        TripsAvailableLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
         HashMap<String, Object> filter = new HashMap<>();
-        String from, to, vehicle, flavor, triptype;
+        
+        String from, to;
+        
         from = FromTF.getText();
+        if(from.equals(""))
+            from = null;
+        System.out.println("from: " + from);
         if (from != null) {
             filter.put("source", from);
         }
+        
         to = ToTF.getText();
+        if(to.equals(""))
+            to = null;
+        System.out.println("to: " + to);
         if (to != null) {
             filter.put("destination", to);
         }
-        vehicle = VehicleCB.getValue().toString();
+        
+        Object vehicle = VehicleCB.getValue();
+        System.out.println("veh: "+vehicle);
         if (vehicle != null) {
-            filter.put("Vehicle Type", vehicle);
+            filter.put("Vehicle Type", vehicle.toString());
         }
-        flavor = TripFlavorCB.getValue().toString();
+        
+        Object flavor = TripFlavorCB.getValue();
+        
         if (flavor != null) {
-            filter.put("No. of Stops", flavor);
+            filter.put("No. of Stops", flavor.toString());
         }
-        triptype = TripTypeCB.getValue().toString();
+        
+        Object triptype = TripTypeCB.getValue();
         if (triptype != null) {
-            if (triptype.equals("Internal")) {
+            if (triptype.toString().equals("Internal")) {
                 filter.put("Trip Type", Trip.INTERNAL);
             } else {
                 filter.put("Trip Type", Trip.EXTERNAL);
@@ -105,15 +125,23 @@ public class CustomerActionsController implements Initializable {
             }
         }
         
-        TripsAvailableLV.getItems().addAll(c.listTrips(filter).toString());
+        ArrayList<Trip> listofTrips = c.listTrips(filter);
+        for(int i = 0; i < listofTrips.size();i++)
+        TripsAvailableLV.getItems().add(listofTrips.get(i).getTripId()+" "
+                +listofTrips.get(i).getSource()+" "
+                +listofTrips.get(i).getDestination()+" "
+                +listofTrips.get(i).getFlavor()+ " "
+                +listofTrips.get(i).isTripType()+" "
+                +listofTrips.get(i).getAvailableSeats());
+        
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //TicketTypeCB.getItems().addAll("Round trip","One way");
-        TripTypeCB.getItems().addAll("","Internal","External");
-        VehicleCB.getItems().addAll("","Car","Mini-Bus","Bus");
-        TripFlavorCB.getItems().addAll("","none","single","multiple");
+        TripTypeCB.getItems().addAll("Internal","External");
+        VehicleCB.getItems().addAll("Car","Mini-Bus","Bus");
+        TripFlavorCB.getItems().addAll("none","single","multiple");
         TripsAvailableLV.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         //show trips read from file to listview
     }    

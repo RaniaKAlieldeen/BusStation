@@ -62,7 +62,7 @@ public class Manager extends User implements ManagerActions{
     @Override
     public void saveTrips() throws IOException{
         File file = new File("trips.txt");
-        BufferedWriter b = new BufferedWriter(new FileWriter(file));
+        BufferedWriter b = new BufferedWriter(new FileWriter(file,false));
         String str ;
         for(Map.Entry<String,Trip> t: Trip.TRIP_MAP.entrySet()){
             str = t.getValue().getTripId() + "," +
@@ -76,7 +76,6 @@ public class Manager extends User implements ManagerActions{
                   t.getValue().isTripType()+"\n";
             System.out.println("str: " + str);
             b.write(str);
-            b.flush();
         }
         b.close();
     }
@@ -88,8 +87,11 @@ public class Manager extends User implements ManagerActions{
         String str ;
         for(Map.Entry<String,Driver> d: Driver.DRIVER_MAP.entrySet()){
             str = d.getValue().getName()+ ","+ d.getValue().getiD() +"," 
-                    + d.getValue().getPassword() + "," +
-                    d.getValue().getTripsAssigned().toString()+"\n";
+                    + d.getValue().getPassword() ;
+            
+            for(int i =0;i<d.getValue().getTripsAssigned().size();i++)
+                str = str + "," + d.getValue().getTripsAssigned().get(i);
+            str = str + "\n";
             System.out.println("str: " + str);
             b.write(str);
         }

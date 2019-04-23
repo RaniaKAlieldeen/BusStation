@@ -12,7 +12,7 @@ public ArrayList<Trip> listTrips(Map<String, Object> filter);
 public boolean checkAvailability(Trip selected, Trip selected2,
 int numOfSeats);
 
-public void reserve(Trip selected, Trip selected2, Customer c,
+public Ticket reserve(Trip selected, Trip selected2, Customer c,
 int numOfSeats);
 
 }

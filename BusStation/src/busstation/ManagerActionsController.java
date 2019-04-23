@@ -107,7 +107,6 @@ public class ManagerActionsController implements Initializable {
     
     public void removeTripBClicked(ActionEvent event)throws IOException
     {
-        
         RemoveTripV.setDisable(false);
         AssignDriverV.setDisable(true);
         AddTripV.setDisable(true);
@@ -119,11 +118,12 @@ public class ManagerActionsController implements Initializable {
     
     public void doneRemoveBClicked(ActionEvent event) throws IOException{
         ObservableList<String> toberemoved = RemoveTripList.getSelectionModel().getSelectedItems();
-        System.out.println(toberemoved);
-        Trip.TRIP_MAP.remove(toberemoved);
+        System.out.println(toberemoved.get(0));
+        Trip.TRIP_MAP.remove(toberemoved.get(0));
         tripRemovedL.setText("Trip Removed.");
         tripRemovedL.setVisible(true);
         m.saveTrips();
+        RemoveTripList.getItems().addAll(m.listTrips());
     }
     
     public void assignDriverBBClicked(ActionEvent event)throws IOException
